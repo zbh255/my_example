@@ -1,0 +1,5 @@
+Java/.idea/^
+Java/out/*
+Java/target/classes/*
+workspace.xml
+Java/.idea
