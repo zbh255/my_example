@@ -25,7 +25,7 @@ func Mutex(n int) {
 	count := &MutexCont{}
 	for i := 0; i < 10; i++ {
 		go func() {
-			for i := 0; i < n / 10; i++ {
+			for i := 0; i < n/10; i++ {
 				count.Count()
 				wg.Done()
 			}
@@ -46,7 +46,7 @@ func RWMutex(n int) {
 	count := &RWMutexCont{}
 	for i := 0; i < 10; i++ {
 		go func() {
-			for i := 0; i < n / 10; i++ {
+			for i := 0; i < n/10; i++ {
 				count.Count()
 				wg.Done()
 			}
@@ -62,34 +62,34 @@ func RWMutex(n int) {
 }
 
 type MutexCont struct {
-	mu sync.Mutex
+	mu    sync.Mutex
 	count int
 }
 
-func(m *MutexCont) Count() int {
+func (m *MutexCont) Count() int {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	return m.count
 }
 
-func(m *MutexCont) CountAdd() {
+func (m *MutexCont) CountAdd() {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.count++
 }
 
 type RWMutexCont struct {
-	mu sync.RWMutex
+	mu    sync.RWMutex
 	count int
 }
 
-func(m *RWMutexCont) Count() int {
+func (m *RWMutexCont) Count() int {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	return m.count
 }
 
-func(m *RWMutexCont) CountAdd() {
+func (m *RWMutexCont) CountAdd() {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.count++

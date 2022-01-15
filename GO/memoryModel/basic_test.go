@@ -11,10 +11,10 @@ func TestSharingMemory(t *testing.T) {
 	var done int
 
 	go func() {
-		for done == 0{
+		for done == 0 {
 			fmt.Printf("done = %d\n", done)
 		}
-		fmt.Printf("x = %d\n",x)
+		fmt.Printf("x = %d\n", x)
 	}()
 
 	go func() {

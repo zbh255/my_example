@@ -36,22 +36,22 @@ func Crsqrt(number float64) float64 {
 	i := number / 2
 	a := 0.0000000000001
 	count := 0
-	for math.Abs(math.Pow(i, 2) -number) > a {
-		i = i - (math.Pow(i,2) - number)/(2*i)
+	for math.Abs(math.Pow(i, 2)-number) > a {
+		i = i - (math.Pow(i, 2)-number)/(2*i)
 		count++
 	}
 	return i
 }
 
 func InvSqrt(x float32) float32 {
-	var xhalf float32 = 0.5*x // get bits for floating VALUE
-	i := math.Float32bits(x) // gives initial guess y0
-	i = 0x5f375a86 - (i>>1) // convert bits BACK to float
+	var xhalf float32 = 0.5 * x // get bits for floating VALUE
+	i := math.Float32bits(x)    // gives initial guess y0
+	i = 0x5f375a86 - (i >> 1)   // convert bits BACK to float
 	x = math.Float32frombits(i) // Newton step, repeating increases accuracy
-	x = x*(1.5-xhalf*x*x)
-	x = x*(1.5-xhalf*x*x)
-	x = x*(1.5-xhalf*x*x)
-	return 1/x
+	x = x * (1.5 - xhalf*x*x)
+	x = x * (1.5 - xhalf*x*x)
+	x = x * (1.5 - xhalf*x*x)
+	return 1 / x
 }
 
 //func BenchmarkSqrt(b *testing.B) {

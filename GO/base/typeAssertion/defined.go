@@ -58,4 +58,3 @@ type imethod struct {
 	name nameOff
 	ityp typeOff
 }
-

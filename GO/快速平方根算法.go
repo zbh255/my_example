@@ -12,8 +12,8 @@ import (
 
 func Qrsqrt(number float32) float32 {
 	var i int
-	var x2,y float32
-	const threeHalfs float32 = 1.5;
+	var x2, y float32
+	const threeHalfs float32 = 1.5
 
 	x2 = number * 0.5
 	y = number
@@ -24,7 +24,7 @@ func Qrsqrt(number float32) float32 {
 	return y * number
 }
 
-func main()  {
+func main() {
 	fmt.Println(math.Sqrt(5))
 	fmt.Print(Qrsqrt(5))
 }

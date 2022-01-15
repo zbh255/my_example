@@ -33,7 +33,7 @@ func main() {
 	Token2()
 }
 
-func TimeOutHmacToken()  {
+func TimeOutHmacToken() {
 	// sample token string taken from the New example
 	tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1MDAwLCJpc3MiOiJ0ZXN0In0.SnPaU08qj8PXhKVaneoNgSzoUPf8ieDnY5_xozuEeSE"
 
@@ -85,7 +85,7 @@ func TimeOutToken() {
 	}
 }
 
-func Token2()  {
+func Token2() {
 	tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1MDAwLCJpc3MiOiJ0ZXN0In0.SnPaU08qj8PXhKVaneoNgSzoUPf8ieDnY5_xozuEeSE"
 
 	type MyCustomClaims struct {
@@ -94,7 +94,7 @@ func Token2()  {
 	}
 
 	// sample token is expired.  override time so it parses as valid
-	test.At(time.Unix(0,0),func() {
+	test.At(time.Unix(0, 0), func() {
 		token, err := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return []byte("AllYourBal"), nil
 		})

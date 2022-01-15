@@ -9,7 +9,7 @@ import (
 func toStringSlice(v interface{}) []string {
 	sv := v.([]interface{})
 	svHeader := (*reflect.SliceHeader)(unsafe.Pointer(&sv))
-	strSlice := make([]string,0)
+	strSlice := make([]string, 0)
 	ssHeader := (*reflect.SliceHeader)(unsafe.Pointer(&strSlice))
 	ssHeader.Cap = svHeader.Cap
 	ssHeader.Len = svHeader.Len
@@ -21,8 +21,8 @@ func toStringSlice(v interface{}) []string {
 }
 
 func main() {
-	n := make([]interface{},7)
-	for i := 0; i < len(n);i++ {
+	n := make([]interface{}, 7)
+	for i := 0; i < len(n); i++ {
 		n[i] = "ll"
 	}
 	strSlice := toStringSlice(n)

@@ -8,7 +8,7 @@ import (
 
 type Interface struct {
 	_iface uintptr
-	data unsafe.Pointer
+	data   unsafe.Pointer
 }
 
 // sync.RWMutex返回的Locker接口其实是可以被还原的

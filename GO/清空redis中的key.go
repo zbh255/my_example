@@ -1,4 +1,5 @@
 package main
+
 //
 //import (
 //	"github.com/foxsuagr-sanse/go-gobang_game/common/db"

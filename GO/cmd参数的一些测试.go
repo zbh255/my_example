@@ -5,8 +5,8 @@ import (
 	"os/exec"
 )
 
-func main()  {
-	cmd := exec.Command("echo","shell")
+func main() {
+	cmd := exec.Command("echo", "shell")
 	cmd.Stdout = os.Stdout
 	err := cmd.Run()
 	if err != nil {

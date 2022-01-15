@@ -8,7 +8,7 @@ import (
 // 测试Go 逃逸分析的一些行为
 
 type User struct {
-	id string
+	id   string
 	name string
 }
 
@@ -55,7 +55,7 @@ func BenchmarkHeapAndStack(b *testing.B) {
 }
 
 type BigObjUser struct {
-	id string
+	id   string
 	name string
 	data []byte
 }
@@ -64,7 +64,7 @@ func NewBigObjUser() *BigObjUser {
 	return &BigObjUser{
 		id:   "xxl",
 		name: "zbh255",
-		data: make([]byte,1024 * 1024),
+		data: make([]byte, 1024*1024),
 	}
 }
 
@@ -77,12 +77,11 @@ func BigObjHeap(n int) {
 	}
 }
 
-
 func BigObjStack(n int) {
 	user := &BigObjUser{
 		id:   "xxl",
 		name: "zbh255",
-		data: make([]byte,1024 * 1024),
+		data: make([]byte, 1024*1024),
 	}
 	for i := 0; i < n; i++ {
 		_ = user.id

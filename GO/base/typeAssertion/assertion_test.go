@@ -7,7 +7,6 @@ import (
 )
 
 type Interface interface {
-
 }
 
 type impl struct {

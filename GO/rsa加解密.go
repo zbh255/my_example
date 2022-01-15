@@ -18,22 +18,22 @@ func main() {
 
 func NewKey() {
 	// 生成私钥
-	privatekey, err := rsa.GenerateKey(rand.Reader,1024)
+	privatekey, err := rsa.GenerateKey(rand.Reader, 1024)
 	if err != nil {
 		panic(err)
 	}
 
 	// 使用x509标准转换为.pem格式的文件
 	derText := x509.MarshalPKCS1PrivateKey(privatekey)
-	
+
 	// 组织一个pem.block
 	block := pem.Block{
-		Type: "rsa private key",
+		Type:  "rsa private key",
 		Bytes: derText,
 	}
 	pathHead, _ := os.Getwd()
 	// pem编码
-	file,err2 := os.Create(pathHead + "/cache/rsa/private.pem")
+	file, err2 := os.Create(pathHead + "/cache/rsa/private.pem")
 	if err2 != nil {
 		panic(err2)
 	}
@@ -51,12 +51,12 @@ func NewKey() {
 
 	// 组织一个pem.block
 	block = pem.Block{
-		Type: "rsa public key",
+		Type:  "rsa public key",
 		Bytes: derpText,
 	}
 
 	// pem编码
-	file2,err4 := os.Create(pathHead + "/cache/rsa/public.pem")
+	file2, err4 := os.Create(pathHead + "/cache/rsa/public.pem")
 	if err4 != nil {
 		panic(err4)
 	}
@@ -68,7 +68,7 @@ func Use() {
 	// 使用公钥加密,私钥解密
 	// 打开公钥文件
 	pathHead, _ := os.Getwd()
-	file,err := os.Open(pathHead + "/cache/rsa/public.pem")
+	file, err := os.Open(pathHead + "/cache/rsa/public.pem")
 	if err != nil {
 		panic(err)
 	}
@@ -77,7 +77,7 @@ func Use() {
 		panic(err)
 	}
 	fmt.Println(fileInfo.Size())
-	buf := make([]byte,fileInfo.Size())
+	buf := make([]byte, fileInfo.Size())
 	_, _ = file.Read(buf)
 	defer file.Close()
 
@@ -91,7 +91,7 @@ func Use() {
 	publicKey := pk.(*rsa.PublicKey)
 
 	// 使用公钥加密数据
-	cipherText,err := rsa.EncryptPKCS1v15(rand.Reader,publicKey, []byte("Hello, world!"))
+	cipherText, err := rsa.EncryptPKCS1v15(rand.Reader, publicKey, []byte("Hello, world!"))
 	if err != nil {
 		panic(err)
 	}
@@ -104,32 +104,32 @@ func Use() {
 	src, _ := base64.StdEncoding.DecodeString(base64.StdEncoding.EncodeToString(cipherText))
 	// 私钥解密
 	// 打开私钥文件
-	prikeyfile,err := os.Open(pathHead + "/cache/rsa/private.pem")
+	prikeyfile, err := os.Open(pathHead + "/cache/rsa/private.pem")
 	if err != nil {
 		panic(err)
 	}
 	defer prikeyfile.Close()
-	fileInfo,err = prikeyfile.Stat()
+	fileInfo, err = prikeyfile.Stat()
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(fileInfo.Size())
-	buf = make([]byte,fileInfo.Size())
+	buf = make([]byte, fileInfo.Size())
 	_, _ = prikeyfile.Read(buf)
 
 	// pem解密
 	block, _ = pem.Decode(buf)
-	privatekey,err := x509.ParsePKCS1PrivateKey(block.Bytes)
+	privatekey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
 		panic(err)
 	}
 
 	// 使用私钥解密密文
-	plainText,err := rsa.DecryptPKCS1v15(nil,privatekey,cipherText)
+	plainText, err := rsa.DecryptPKCS1v15(nil, privatekey, cipherText)
 	if err != nil {
 		panic(err)
 	}
-	plainText2,err := rsa.DecryptPKCS1v15(nil,privatekey,src)
+	plainText2, err := rsa.DecryptPKCS1v15(nil, privatekey, src)
 	if err != nil {
 		panic(err)
 	}

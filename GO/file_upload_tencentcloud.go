@@ -12,11 +12,9 @@ import (
 	"strings"
 )
 
-
-
 func GinFileUpload() {
 	r := gin.Default()
-	r.POST("/file",click)
+	r.POST("/file", click)
 	_ = r.Run("127.0.0.1:8080")
 }
 
@@ -30,7 +28,7 @@ func click(ctx *gin.Context) {
 			"message": file.Filename,
 		})
 	}
-	src,_ := file.Open()
+	src, _ := file.Open()
 	println(src)
 	buf := bytes.NewBuffer(nil)
 	_, err := io.Copy(buf, src)
@@ -39,32 +37,32 @@ func click(ctx *gin.Context) {
 	}
 	//fmt.Println(buf.String())
 	bufStr := strings.NewReader(buf.String())
-	u,_ := url.Parse("https://examplebucket-1250000000.cos.COS_REGION.myqcloud.com")
+	u, _ := url.Parse("https://examplebucket-1250000000.cos.COS_REGION.myqcloud.com")
 	// 用于Get Service 查询，默认全地域 service.cos.myqcloud.com
 	su, _ := url.Parse("https://cos.COS_REGION.myqcloud.com")
 
-	b := cos.BaseURL{BucketURL: u,ServiceURL: su}
+	b := cos.BaseURL{BucketURL: u, ServiceURL: su}
 
 	// 永久密钥
-	client := cos.NewClient(&b,&http.Client{
+	client := cos.NewClient(&b, &http.Client{
 		Transport: &cos.AuthorizationTransport{
-			SecretID: "",
+			SecretID:  "",
 			SecretKey: "",
 		},
 	})
 
 	if client != nil {
 		// 调用cos请求
-		s,_,err := client.Service.Get(context.Background())
+		s, _, err := client.Service.Get(context.Background())
 		if err != nil {
 			panic(err)
 		}
-		for _,b := range s.Buckets {
+		for _, b := range s.Buckets {
 			fmt.Printf("%#v\n", b)
 		}
 
 		// 将文件上传到桶中
-		_,err2 := client.Object.Put(context.Background(),file.Filename, bufStr,nil)
+		_, err2 := client.Object.Put(context.Background(), file.Filename, bufStr, nil)
 		if err2 != nil {
 			panic(err)
 		}
