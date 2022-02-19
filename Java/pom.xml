@@ -26,5 +26,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>algs4</groupId>
+            <artifactId>algs4</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/library/algs4/algs4/1.0.0/algs4.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
